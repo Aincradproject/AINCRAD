@@ -1,0 +1,32 @@
+<h1>Hexgrid</h1>
+<section 
+	id="horizontal-map" 
+	ng-controller="MapCtrl as mapC"
+	ng-init="mapC.init('horizontal',6,6)">
+	<h2>Vertical layout</h2>
+	<svg class="map-container" height="240" width="270">
+		<g class="inner-map" transform="translate({{mapC.map.offset.x}},{{mapC.map.offset.y}})">
+			<!-- Col 1 -->
+			<g class="tile" transform="translate({{hextile.x}},{{hextile.y}})" ng-repeat="hextile in mapC.mapArray">
+				<polygon points="17.320508075688775,-9.999999999999998 17.320508075688775,9.999999999999998 1.2246467991473533e-15,20 -17.320508075688775,9.999999999999998 -17.320508075688778,-9.999999999999995 -3.673940397442059e-15,-20 "></polygon>
+			</g>
+		</g>
+
+	</svg>
+</section>
+
+<section 
+	id="vertical-map" 
+	ng-controller="MapCtrl as mapC"
+	ng-init="mapC.init('vertical',6,6)">
+	<h2>Vertical layout</h2>
+	<svg class="map-container" height="240" width="270">
+		<g class="inner-map" transform="translate({{mapC.map.offset.x}},{{mapC.map.offset.y}})">
+			<!-- Col 1 -->
+			<g class="tile" transform="translate({{hextile.x}},{{hextile.y}})" ng-repeat="hextile in mapC.mapArray">
+				<polygon points="20,0 10.000000000000002,17.32050807568877 -9.999999999999996,17.320508075688775 -20,2.4492935982947065e-15 -10.000000000000009,-17.320508075688767 10.000000000000002,-17.32050807568877 "></polygon>
+			</g>
+		</g>
+
+	</svg>
+</section>
