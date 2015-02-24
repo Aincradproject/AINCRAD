@@ -30,6 +30,7 @@ myApp.controller('MapCtrl', ['$scope', function($scope) {
 	this.map = {
 		dimensions : {x:0,y:0}, 
 		direction  : null,
+		size       : {width: 0, height: 0},
 		offset     : {x: null, y: null}
 	};
 
@@ -38,8 +39,8 @@ myApp.controller('MapCtrl', ['$scope', function($scope) {
 	this.init = function(direction,width,height) {
 		var that = this;
 
-		that.map.dimensions.x = width || 1;
-		that.map.dimensions.y = height || 1;
+		that.map.dimensions.x = height || 1;
+		that.map.dimensions.y = width || 1;
 		that.map.direction    = direction || 'vertical';
 
 		that.map.offset.x     = that.layout[direction].x.containerOffset;
@@ -76,7 +77,16 @@ myApp.controller('MapCtrl', ['$scope', function($scope) {
 						var posY = data.y.base.even + (data.y.offset * cX);
 					}
 				}
+				/* add the tile */
 				that.mapArray.push({x: posX, y: posY});
+
+				/* set the length for the container */
+				if (posX > that.map.size.width) {
+					that.map.size.width = posX;
+				}
+				if (posY > that.map.size.height) {
+					that.map.size.height = posY;
+				}
 			};
 		};
 	}
