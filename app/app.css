@@ -17,12 +17,16 @@ body {
   font-size: 14px;
   line-height: 1.42857;
   color: #333;
-  background-color: #e9eded; 
+  /*background-color: #e9eded; */
+  background-color: #000; 
 }
 
 #wrapper {
   margin: 0 auto;
+  padding: 20px;
   width: 960px;
+  background-color: #3C3C3C;
+  color: #e9eded;
 }
 
 /* app css stylesheet */
