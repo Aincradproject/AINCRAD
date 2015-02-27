@@ -10,10 +10,10 @@ angular.module('myApp.map', ['ngRoute'])
   });
 }])
 
-.controller('MapCtrl', ['$scope', 'goHexagon', function($scope, goHexagon) {
+.controller('MapCtrl', ['$scope', 'groPolygon', function($scope, groPolygon) {
   /* Horizontal & Vertical layout settings */
   /* odd = impair & even = pair */
-  this.hexagon = goHexagon;
+  this.polygon = groPolygon;
 
   /* horizontal for flat, and vertical for pointy tile */
   this.layout = {
@@ -48,18 +48,19 @@ angular.module('myApp.map', ['ngRoute'])
 
   this.mapArray = [];
 
-  this.init = function(mapDirection,mapWidth,mapHeight,tileOrientation,tileCenter,tileSize) {
+  this.init = function(mapParams,tileParams) {
     var that = this;
 
-    that.tile.orientation = tileOrientation || 'pointy';
-    that.tile.center      = tileCenter || {x:0,y:0};
-    that.tile.size        = tileSize || 20;
+    that.tile.polygon     = tileParams.polygon     || 'hexagon',
+    that.tile.orientation = tileParams.orientation || 'pointy';
+    that.tile.center      = tileParams.center      || {x:0,y:0};
+    that.tile.size        = tileParams.size        || 20;
 
-    that.map.dimensions.x = mapHeight || 1;
-    that.map.dimensions.y = mapWidth || 1;
-    that.map.direction    = mapDirection || 'vertical';
-    that.map.offset.x     = that.layout[mapDirection].x.containerOffset;
-    that.map.offset.y     = that.layout[mapDirection].y.containerOffset;
+    that.map.dimensions.x = mapParams.height       || 1;
+    that.map.dimensions.y = mapParams.width        || 1;
+    that.map.direction    = mapParams.direction    || 'vertical';
+    that.map.offset.x     = that.layout[mapParams.direction].x.containerOffset;
+    that.map.offset.y     = that.layout[mapParams.direction].y.containerOffset;
 
     that.buildTile();
     that.buildMap();
@@ -70,12 +71,16 @@ angular.module('myApp.map', ['ngRoute'])
     var that = this;
     var tile = that.tile;
 
-    tile.points = that.hexagon.getPoints(tile.orientation, tile.center, tile.size);
+    tile.points = that.polygon.getPoints(
+      tile.polygon, {
+        orientation : tile.orientation,
+        center      : tile.center,
+        size        : tile.size
+      });
     
     for (var i = 0; i < (tile.points).length; i++) {
       tile.pointsString += tile.points[i].x + ',' + tile.points[i].y + ' ';
     };
-    console.log(tile.pointsString);
   }
 
   this.buildMap = function() {

@@ -2,7 +2,7 @@
 <section 
 	id="horizontal-map" 
 	ng-controller="MapCtrl as mapC"
-	ng-init="mapC.init('horizontal',18,12,'pointy',0,25)" ng-cloak>
+	ng-init="mapC.init({direction:'horizontal',width:12,height:8},{polygon:'hexagon',orientation:'pointy'})" ng-cloak>
 	<h2>Vertical layout ({{mapC.map.dimensions.y}} x {{mapC.map.dimensions.x}})</h2>
 	<svg class="map-container" height="{{mapC.map.size.height + 57}}" width="{{mapC.map.size.width + 53.5}}">
 		<g class="inner-map" transform="translate({{mapC.map.offset.x}},{{mapC.map.offset.y}})">
@@ -16,7 +16,7 @@
 <section 
 	id="vertical-map" 
 	ng-controller="MapCtrl as mapC"
-	ng-init="mapC.init('vertical',6,6,'flat')" ng-cloak>
+	ng-init="mapC.init({direction:'vertical',width:6,height:6},{polygon:'decagon',orientation:'pointyTop'})" ng-cloak>
 	<h2>Vertical layout ({{mapC.map.dimensions.y}} x {{mapC.map.dimensions.x}})</h2>
 	<svg class="map-container" height="{{mapC.map.size.height + 49.5}}" width="{{mapC.map.size.width + 60}}">
 		<g class="inner-map" transform="translate({{mapC.map.offset.x}},{{mapC.map.offset.y}})">
